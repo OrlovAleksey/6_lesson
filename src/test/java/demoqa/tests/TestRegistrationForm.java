@@ -5,8 +5,16 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPages;
 public class TestRegistrationForm {
-    RegistrationPages registrationPages = new RegistrationPages();
 
+    String firstName = "Alex";
+    String lastName = "Orlov";
+    String email = "aorlov@site.com";
+    String phone = "9777742959";
+    String day = "12";
+    String month = "October";
+    String year = "1996";
+
+    RegistrationPages registrationPages = new RegistrationPages();
     @BeforeAll
     static void setUp(){
         Configuration.holdBrowserOpen = true; //Делаем чтобы браузер оставался открытым
@@ -16,12 +24,12 @@ public class TestRegistrationForm {
 
     void simpleTest(){
         registrationPages.openPage()
-                .setFirstName("Orlov")
-                .setLastName("Alex")
-                .setEmail("aorlov@site.com")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(email)
                 .setGender("Male")
-                .setPhone("9777742959")
-                .setBirthDate("12","October","1996")
+                .setPhone(phone)
+                .setBirthDate(day,month,year)
                 .setSubjects("Hindi")
                 .setHobbies("Music")
                 .uploadFile()
@@ -30,11 +38,11 @@ public class TestRegistrationForm {
                 .submitForm();
 
         registrationPages.checkResultsTableVisible()
-                .checkResultTable("Student Name", "Orlov Alex")
-                .checkResultTable("Student Email", "aorlov@site.com")
+                .checkResultTable("Student Name", firstName +" "+ lastName)
+                .checkResultTable("Student Email", email)
                 .checkResultTable("Gender", "Male")
-                .checkResultTable("Mobile", "9777742959")
-                .checkResultTable("Date of Birth", "12 October,1996")
+                .checkResultTable("Mobile", phone)
+                .checkResultTable("Date of Birth", day + " "+ month +","+year)
                 .checkResultTable("Subjects", "Hindi")
                 .checkResultTable("Hobbies", "Music")
                 .checkResultTable("Picture", "CKtO-Q6I1ks.jpg")
