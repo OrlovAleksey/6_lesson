@@ -4,9 +4,11 @@ import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPages;
-public class TestRegistrationForm {
+import static demoqa.tests.TestData.*;
 
-    String firstName = "Alex";
+public class TestRegistrationForm extends TestBase {
+
+     String firstName = "Alex";
     String lastName = "Orlov";
     String email = "aorlov@site.com";
     String phone = "9777742959";
@@ -15,19 +17,15 @@ public class TestRegistrationForm {
     String year = "1996";
 
     RegistrationPages registrationPages = new RegistrationPages();
-    @BeforeAll
-    static void setUp(){
-        Configuration.holdBrowserOpen = true; //Делаем чтобы браузер оставался открытым
-        Configuration.baseUrl = "https://demoqa.com"; //Добавляем настройку стандартного урла
-    }
     @Test
 
     void simpleTest(){
+
         registrationPages.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setEmail(email)
-                .setGender("Male")
+                .setGender(UserGender)
                 .setPhone(phone)
                 .setBirthDate(day,month,year)
                 .setSubjects("Hindi")
